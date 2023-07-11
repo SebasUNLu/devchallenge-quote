@@ -82,6 +82,7 @@ const QuoteContextProvider = ({ children }: PropsWithChildren<{}>) => {
     setRandomQuote(null);
     setLoading(true);
     try {
+      console.log(author);
       let quotes: Quote[] = [];
       let currentPage: number | null = 1;
       do {
@@ -91,7 +92,9 @@ const QuoteContextProvider = ({ children }: PropsWithChildren<{}>) => {
           return res.json();
         });
         quotes = [...quotes, ...response.data];
+        currentPage = response.pagination.nextPage;
       } while (currentPage);
+      console.log(quotes);
       setAuthorQuotes({
         author,
         quotes,
