@@ -17,3 +17,8 @@ export interface Quote {
   quoteGenre: string,
   __v: number
 }
+
+export interface AuthorQuotes {
+  author: string;
+  quotes: Quote[];
+}
