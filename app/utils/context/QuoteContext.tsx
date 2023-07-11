@@ -61,6 +61,7 @@ const QuoteContextProvider = ({ children }: PropsWithChildren<{}>) => {
 
   const getRandomQuote = async () => {
     setAuthorQuotes(null);
+    setError('')
     setLoading(true);
     try {
       const response: ApiResponse = await fetch(
@@ -71,7 +72,6 @@ const QuoteContextProvider = ({ children }: PropsWithChildren<{}>) => {
       // Las quotes vienen en un array, por eso saco el primero
       setRandomQuote(response.data[0]);
     } catch (e) {
-      console.log(e);
       setErrors();
     } finally {
       setLoading(false);
@@ -80,9 +80,9 @@ const QuoteContextProvider = ({ children }: PropsWithChildren<{}>) => {
 
   const getAuthorQuotes = async (author: string) => {
     setRandomQuote(null);
+    setError('')
     setLoading(true);
     try {
-      console.log(author);
       let quotes: Quote[] = [];
       let currentPage: number | null = 1;
       do {
@@ -94,13 +94,11 @@ const QuoteContextProvider = ({ children }: PropsWithChildren<{}>) => {
         quotes = [...quotes, ...response.data];
         currentPage = response.pagination.nextPage;
       } while (currentPage);
-      console.log(quotes);
       setAuthorQuotes({
         author,
         quotes,
       });
     } catch (e) {
-      console.log(e);
       setErrors();
     } finally {
       setLoading(false);

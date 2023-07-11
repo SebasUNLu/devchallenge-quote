@@ -4,9 +4,12 @@ import React from "react";
 import { useQuoteContext } from "../../context/QuoteContext";
 import RandomQuote from "./RandomQuote/RandomQuote";
 import AuthorQuotes from "./authorQuotes/AuthorQuotes";
+import Loader from "../Loader";
 
 const QuoteList = () => {
-  const { randomQuote, authorQuotes } = useQuoteContext();
+  const { authorQuotes, loading } = useQuoteContext();
+
+  if(loading) return <Loader />
 
   if (authorQuotes) return <AuthorQuotes />;
 
