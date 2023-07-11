@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
+import { useQuoteContext } from "../../context/QuoteContext";
+import RandomQuote from "./RandomQuote/RandomQuote";
 
 const QuoteList = () => {
 
-  return (
-    <div className="">
-    </div>
-  );
+  const {randomQuote} = useQuoteContext()
+
+  return <RandomQuote />
 };
 
 export default QuoteList;
